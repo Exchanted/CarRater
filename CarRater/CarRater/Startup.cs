@@ -44,7 +44,8 @@ namespace CarRater
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, 
+            UserManager<IdentityUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -62,6 +63,8 @@ namespace CarRater
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            DbSeeder.SeedDb(context, userManager);
 
             app.UseMvc(routes =>
             {
