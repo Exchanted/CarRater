@@ -21,7 +21,7 @@ namespace CarRater.Controllers
         [AllowAnonymous] // Overwritten to allow the view of non-logged in users
         public IActionResult About() 
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "About";
 
             return View();
         }
