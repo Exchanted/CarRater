@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using CarRater.Models;
 
 namespace CarRater.Data
 {
@@ -12,5 +13,6 @@ namespace CarRater.Data
             : base(options)
         {
         }
+        public DbSet<CarRater.Models.Contact> Contacts { get; set; }
     }
 }
