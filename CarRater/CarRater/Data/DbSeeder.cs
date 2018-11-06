@@ -63,9 +63,7 @@ namespace CarRater.Data
         private static void SeedContacts(ApplicationDbContext context)
         {
             context.Database.EnsureCreated(); //Check if database exists, if not it will be created
-            //context.Contacts.Add(
-            //        new Contact() { Name = "Callum" }
-            //    );
+            
             context.SaveChanges();
         }
     }
