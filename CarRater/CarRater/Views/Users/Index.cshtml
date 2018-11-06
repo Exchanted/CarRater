@@ -1,0 +1,31 @@
+﻿@model CarRater.Models.UserListViewModel
+
+@{
+    ViewData["Title"] = "AdminPanel";
+}
+
+<h2>Admin Panel: User List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Users)
+        {
+            @(item.Email + " ")
+            <br>
+        }
+
+        <br>
+
+        <p>Number of Users: @Model.NumberOfUsers </p>
+        
+    </tbody>
+</table>

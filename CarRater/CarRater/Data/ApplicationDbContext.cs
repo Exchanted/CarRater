@@ -13,6 +13,5 @@ namespace CarRater.Data
             : base(options)
         {
         }
-        public DbSet<CarRater.Models.Contact> Contacts { get; set; }
     }
-}
+}   

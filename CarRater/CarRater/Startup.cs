@@ -65,6 +65,7 @@ namespace CarRater
             app.UseAuthentication();
 
             DbSeeder.SeedDb(context, userManager);
+            userManager.Users.ToList();
 
             app.UseMvc(routes =>
             {
