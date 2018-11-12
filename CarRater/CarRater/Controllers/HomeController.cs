@@ -33,7 +33,7 @@ namespace CarRater.Controllers
             return View();
         }
         
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult Admin() //Add above if user is authenticated as role admin then display this
         {
             return RedirectToAction("", "Users");

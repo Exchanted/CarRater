@@ -37,7 +37,7 @@ namespace CarRater
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -45,7 +45,7 @@ namespace CarRater
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, 
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -64,7 +64,7 @@ namespace CarRater
 
             app.UseAuthentication();
 
-            DbSeeder.SeedDb(context, userManager);
+            DbSeeder.SeedDb(context, userManager, roleManager);
             userManager.Users.ToList();
 
             app.UseMvc(routes =>
