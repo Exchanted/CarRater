@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CarRater.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
