@@ -19,6 +19,7 @@ namespace CarRater.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private object userManager;
 
         public RegisterModel(
             RoleManager<IdentityRole> roleManager,
@@ -70,6 +71,7 @@ namespace CarRater.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                _userManager.AddToRoleAsync(user, "Customer").Wait(); // Make user a customer by default
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
