@@ -12,10 +12,16 @@ namespace CarRater.Controllers
     [Authorize] // Require a user to login when visitting the page
     public class HomeController : Controller
     {
-        
+        [Authorize]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult Splash()
+        {
+            return View("Splash");
         }
 
         [AllowAnonymous] // Overwritten to allow the view of non-logged in users
@@ -26,6 +32,7 @@ namespace CarRater.Controllers
             return View();
         }
 
+        [AllowAnonymous] // Overwritten to allow the view of non-logged in users
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
