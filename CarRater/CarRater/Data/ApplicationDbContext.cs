@@ -13,5 +13,8 @@ namespace CarRater.Data
             : base(options)
         {
         }
+
+        
+
     }
-}   
+}

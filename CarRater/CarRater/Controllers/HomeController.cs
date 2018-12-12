@@ -17,7 +17,7 @@ namespace CarRater.Controllers
         {
             return View();
         }
-
+        
         [AllowAnonymous]
         public IActionResult Splash()
         {
@@ -41,9 +41,9 @@ namespace CarRater.Controllers
         }
         
         [Authorize(Roles = "Administrator")]
-        public IActionResult Admin() //Add above if user is authenticated as role admin then display this
+        public IActionResult Admin() //Add if user is authenticated as role admin then display this
         {
-            return RedirectToAction("", "Users");
+            return RedirectToAction("", "Users/Index");
         }
 
         public IActionResult Privacy()

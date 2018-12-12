@@ -26,50 +26,50 @@ namespace CarRater.Data
         {
             IdentityUser member1 = new IdentityUser
             {
-                UserName = "member1@member.com",
-                Email = "member1@member.com"
+                UserName = "Member1@email.com",
+                Email = "Member1@email.com"
             };
-            userManager.CreateAsync(member1, "P@ssword123!").Wait(); // Use wait otherwise code will continuously run and seed wouldnt work (user wouldnt be added)
+            userManager.CreateAsync(member1, "Password123!").Wait(); // Use wait otherwise code will continuously run and seed wouldnt work (user wouldnt be added)
             userManager.AddToRoleAsync(member1, "Administrator").Wait();
 
             IdentityUser contact1 = new IdentityUser
             {
-                UserName = "contact1@customer.com",
-                Email = "contact1@customer.com"
+                UserName = "Customer1@email.com",
+                Email = "Customer1@email.com"
             };
-            userManager.CreateAsync(contact1, "P@ssword123!").Wait();
+            userManager.CreateAsync(contact1, "Password123!").Wait();
             userManager.AddToRoleAsync(contact1, "Customer").Wait();
 
             IdentityUser contact2 = new IdentityUser
             {
-                UserName = "contact2@customer.com",
-                Email = "contact2@customer.com"
+                UserName = "Customer2@email.com",
+                Email = "Customer2@email.com"
             };
-            userManager.CreateAsync(contact2, "P@ssword123!").Wait();
+            userManager.CreateAsync(contact2, "Password123!").Wait();
             userManager.AddToRoleAsync(contact2, "Customer").Wait();
 
             IdentityUser contact3 = new IdentityUser
             {
-                UserName = "contact3@customer.com",
-                Email = "contact3@customer.com"
+                UserName = "Customer3@email.com",
+                Email = "Customer3@email.com"
             };
-            userManager.CreateAsync(contact3, "P@ssword123!").Wait();
+            userManager.CreateAsync(contact3, "Password123!").Wait();
             userManager.AddToRoleAsync(contact3, "Customer").Wait();
 
             IdentityUser contact4 = new IdentityUser
             {
-                UserName = "contact4@customer.com",
-                Email = "contact4@customer.com"
+                UserName = "Customer4@email.com",
+                Email = "Customer5@email.com"
             };
-            userManager.CreateAsync(contact4, "P@ssword123!").Wait();
+            userManager.CreateAsync(contact4, "Password123!").Wait();
             userManager.AddToRoleAsync(contact4, "Customer").Wait();
 
             IdentityUser contact5 = new IdentityUser
             {
-                UserName = "contact5@customer.com",
-                Email = "contact5@customer.com"
+                UserName = "Customer5@email.com",
+                Email = "Customer5@email.com"
             };
-            userManager.CreateAsync(contact5, "P@ssword123!").Wait();
+            userManager.CreateAsync(contact5, "Password123!").Wait();
             userManager.AddToRoleAsync(contact5, "Customer").Wait();
         }
 
