@@ -19,7 +19,7 @@
 
         @foreach (var item in Model.Users)
         {
-            @(item.Email + " ")
+            @("Email: " + item.Email + " - " + "Username: " + item.UserName + " ")
             <br>
         }
 
