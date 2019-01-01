@@ -4,43 +4,22 @@ using CarRater.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRater.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190101183428_PostsController")]
+    partial class PostsController
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CarRater.Models.Comments", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("MyPostsId");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MyPostsId");
-
-                    b.ToTable("Comments");
-                });
 
             modelBuilder.Entity("CarRater.Models.Posts", b =>
                 {
@@ -55,8 +34,6 @@ namespace CarRater.Data.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
@@ -222,13 +199,6 @@ namespace CarRater.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("CarRater.Models.Comments", b =>
-                {
-                    b.HasOne("CarRater.Models.Posts", "MyPosts")
-                        .WithMany()
-                        .HasForeignKey("MyPostsId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

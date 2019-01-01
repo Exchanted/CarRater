@@ -13,8 +13,7 @@ namespace CarRater.Data
             : base(options)
         {
         }
-
-        
-
+        public DbSet<CarRater.Models.Posts> Posts { get; set; }
+        public DbSet<CarRater.Models.Comments> Comments { get; set; }
     }
 }

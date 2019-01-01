@@ -15,7 +15,7 @@ namespace CarRater.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            return View(RedirectToAction("", "Posts/Index"));
         }
         
         [AllowAnonymous]
