@@ -38,7 +38,7 @@ namespace CarRater.Controllers
                 return NotFound();
             }
 
-            var posts = await _context.Posts
+            Posts posts = await _context.Posts
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (posts == null)
             {
@@ -96,6 +96,8 @@ namespace CarRater.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Link")] Posts posts)
         {
+            IdentityUser user = await _userManager.GetUserAsync(User);
+            
             if (id != posts.Id)
             {
                 return NotFound();
@@ -105,6 +107,8 @@ namespace CarRater.Controllers
             {
                 try
                 {
+                    posts.UserId = user.Id;
+                    _context.Add(posts);
                     _context.Update(posts);
                     await _context.SaveChangesAsync();
                 }

@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Posts</title>
 </head>
 <body>
     <p>
@@ -21,7 +21,7 @@
         <thead>
             <tr>
                 <th>
-                    Username
+                    Author of Post
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Title)
@@ -35,9 +35,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-
                 IdentityUser identityUser = await UserManager.FindByIdAsync(item.UserId);
-
                 <tr>
                     <td>
                         @identityUser.UserName

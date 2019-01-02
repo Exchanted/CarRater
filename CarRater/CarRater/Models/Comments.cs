@@ -13,8 +13,6 @@ namespace CarRater.Models
         [StringLength(50)]
         [Required]
         public String Comment { get; set; }
-        
-        public String UserId { get; set; }
 
         public virtual Posts MyPosts { get; set; }
     }
