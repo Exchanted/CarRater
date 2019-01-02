@@ -48,13 +48,13 @@
                     </td>
                     <td>
 
+                        <a asp-action="Details" asp-route-id="@item.Id">Comments</a>
+
                         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
                         {
                             //Check if user is admin role and then display admin button along header
                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                         }
-
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
 
                         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
                         {
