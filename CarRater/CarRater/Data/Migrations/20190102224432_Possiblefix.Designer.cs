@@ -4,14 +4,16 @@ using CarRater.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRater.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190102224432_Possiblefix")]
+    partial class Possiblefix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,7 @@ namespace CarRater.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(250);
 
-                    b.Property<int?>("MyPostsId");
+                    b.Property<int>("MyPostsId");
 
                     b.Property<string>("UserId");
 
@@ -226,7 +228,8 @@ namespace CarRater.Data.Migrations
                 {
                     b.HasOne("CarRater.Models.Posts", "MyPosts")
                         .WithMany()
-                        .HasForeignKey("MyPostsId");
+                        .HasForeignKey("MyPostsId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

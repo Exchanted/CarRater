@@ -45,15 +45,17 @@
                     </td>
                     <td>
                         <a href="@item.Link" target="_blank">@item.Link</a>
+
+                        <img width="400" height="500" src="@item.Link"/>
                     </td>
                     <td>
 
-                        <a asp-action="Details" asp-route-id="@item.Id">Comments</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Comments - </a>
 
                         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
                         {
                             //Check if user is admin role and then display admin button along header
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit Post - </a>
                         }
 
                         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
