@@ -25,9 +25,10 @@ namespace CarRater.Controllers
         }
 
         // GET: Posts
+        //Order posts by most recent
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Posts.ToListAsync());
+            return View(await _context.Posts.OrderByDescending(a => a.Id).ToListAsync());
         }
 
         // GET: Posts/Details/5
@@ -101,6 +102,7 @@ namespace CarRater.Controllers
         }
 
         // GET: Posts/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
