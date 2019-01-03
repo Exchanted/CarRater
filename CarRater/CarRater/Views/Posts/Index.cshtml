@@ -14,59 +14,62 @@
     <title>Posts</title>
 </head>
 <body>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Author of Post
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Link)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                IdentityUser identityUser = await UserManager.FindByIdAsync(item.UserId);
+    @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @identityUser.UserName
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        <a href="@item.Link" target="_blank">@item.Link</a>
-
-                        <img width="400" height="500" src="@item.Link"/>
-                    </td>
-                    <td>
-
-                        <a asp-action="Details" asp-route-id="@item.Id">Comments - </a>
-
-                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                        {
-                            //Check if user is admin role and then display admin button along header
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit Post - </a>
-                        }
-
-                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                        {
-                            //Check if user is admin role and then display admin button along header
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        }
-                    </td>
+                    <th>
+                        Author of Post
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Link)
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</body>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    IdentityUser identityUser = await UserManager.FindByIdAsync(item.UserId);
+                    <tr>
+                        <td>
+                            @identityUser.UserName
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <a href="@item.Link" target="_blank">@item.Link</a>
+
+                            <img width="400" height="500" src="@item.Link" />
+                        </td>
+                        <td>
+
+                            <a asp-action="Details" asp-route-id="@item.Id">Comments - </a>
+
+                            @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                            {
+                                //Check if user is admin role and then display admin button along header
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit Post - </a>
+                            }
+
+                            @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                            {
+                                //Check if user is admin role and then display admin button along header
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>
 </html>
