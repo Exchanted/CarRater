@@ -76,9 +76,15 @@ namespace CarRater.Controllers
                 await _context.SaveChangesAsync();
                 viewModel = await GetCommentsDetailsFromPosts(posts);
 
+                //Prevent User Refreshing webpage to Resend POST Request by Redirecting to Home
+                return RedirectToAction("Index", "Posts");
+
             }
-            //Prevent User Refreshing webpage to Resend POST Request by Redirecting to Home
-            return RedirectToAction("Index", "Posts");
+
+            Posts myPost = await _context.Posts.FindAsync(viewModel.PostsID);
+            viewModel = await GetCommentsDetailsFromPosts(myPost);
+            
+            return View(viewModel);
         }
 
         private async Task<CommentsViewModel> GetCommentsDetailsFromPosts(Posts posts)
