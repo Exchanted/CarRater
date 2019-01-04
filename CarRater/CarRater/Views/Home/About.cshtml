@@ -4,5 +4,10 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>In order to access the website further, you must use a logged in account.</p> 
-<a href="~/">Login</a>
+<p>In order to access the website further, you must use a logged in account.</p>
+<li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+
+<br />
+
+<p>Alternatively, you can register here.</p>
+<li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>

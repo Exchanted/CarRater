@@ -11,6 +11,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="Stylesheet" href="/css/Post.css" type="text/css" />
     <title>Post Comments</title>
 </head>
 <body>
@@ -18,23 +19,23 @@
     <div>
         <h4>Posts</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.posts.Title)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.posts.Title)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.posts.Link)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.posts.Link)
-            </dd>
-        </dl>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.posts.Title)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.posts.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.posts.Link)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.posts.Link)
+                </dd>
+            </dl>
     </div>
 
-    <table class="table">
+    <table class="table panel">
         <thead>
             <tr>
                 <th>
@@ -44,27 +45,28 @@
                     Comment
                 </th>
 </thead>
+
         <tbody>
             @foreach (Comments item in Model.Comments)
             {
                 IdentityUser identityUser = await UserManager.FindByIdAsync(item.UserId);
-            <tr>
-                <td>
-                    @identityUser.UserName
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comment)
-                </td>
-                <td>
-                    @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                    {
-                        //Check if user is admin role and then display admin button along header
-                        <a asp-action="DeleteComment" asp-route-id="@item.Id">Delete</a>
+                <tr>
+                    <td>
+                        @identityUser.UserName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                        {
+                            //Check if user is admin role and then display admin button along header
+                            <a asp-action="DeleteComment" asp-route-id="@item.Id">Delete</a>
+                        }
+                    </td>
+                </tr>
                     }
-                </td>
-            </tr>
-            }
-        </tbody>
+            </tbody>
     </table>
 
     <h4>Comments</h4>

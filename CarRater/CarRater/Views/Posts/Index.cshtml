@@ -17,70 +17,71 @@
     @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
     {
         <p>
-            <a class="btn btn-lg btn-primary" style="border-width: 5px; border-color: white; margin-bottom: 10px; width: 900px; height: 80px; opacity: 0.6; font-size: 35px" asp-action="Create">Create New Post</a>
+            <a class="btn btn-lg btn-primary" position="center" style="border-width: 5px; border-color: white; margin-bottom: 10px; width: auto; height: 80px; opacity: 0.6; font-size: 35px" asp-action="Create">Create New Post</a>
         </p>
     }
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Author of Post
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Title)
-                    </th>
-                    <th>
-                        Image
-                    </th>
-                    <th>
-                        Source
-                    </th>
-                    <th>
-                        Comment
-                    </th>
 
-                    @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                    {
+        <table class="table panel">
+            <thead>
+                <div class="panel-heading">
+                    <tr>
                         <th>
-                            Admin Panel
+                            Author of Post
                         </th>
-                    }
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Source
+                        </th>
+                        <th>
+                            Comment
+                        </th>
+
+                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                        {
+                            <th>
+                                Admin Panel
+                            </th>
+                        }
                         <th></th>
                     </tr>
+                </div>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     IdentityUser identityUser = await UserManager.FindByIdAsync(item.UserId);
                 <tr>
-                    <td>
-                        @identityUser.UserName
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        <img width="350" height="350" src="@item.Link" />
-                    </td>
-                    <td>
-                        <a href="@item.Link" target="_blank">@item.Link</a>
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Comments - </a>
-                    </td>
-                    <td>
-                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                        {
-                            //Check if user is admin role and then display admin button along header
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit Post - </a>
-                        }
+                        <td>
+                            @identityUser.UserName
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <img width="350" height="350" src="@item.Link" />
+                        </td>
+                        
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id">Comments - </a>
+                        </td>
+                        <td>
+                            @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                            {
+                                //Check if user is admin role and then display admin button along header
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit Post - </a>
+                            }
 
-                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                        {
-                            //Check if user is admin role and then display admin button along header
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        }
-                    </td>
+                            @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                            {
+                                //Check if user is admin role and then display admin button along header
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            }
+                        </td>
                 </tr>
                 }
             </tbody>
