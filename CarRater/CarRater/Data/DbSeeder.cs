@@ -59,7 +59,7 @@ namespace CarRater.Data
             IdentityUser contact4 = new IdentityUser
             {
                 UserName = "Customer4@email.com",
-                Email = "Customer5@email.com"
+                Email = "Customer4@email.com"
             };
             userManager.CreateAsync(contact4, "Password123!").Wait();
             userManager.AddToRoleAsync(contact4, "Customer").Wait();
