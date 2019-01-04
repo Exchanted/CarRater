@@ -195,15 +195,7 @@ namespace CarRater.Controllers
 
             var posts = await _context.Posts
                 .FirstOrDefaultAsync(m => m.Id == id);
-
-            List<Comments> comments =  _context.Comments
-                .Where(comment => comment.MyPosts.Id == id).ToList();
-
-            foreach (Comments comment in comments)
-            {
-                _context.Comments.Remove(comment);
-            }
-
+            
             if (posts == null)
             {
                 return NotFound();
@@ -246,8 +238,24 @@ namespace CarRater.Controllers
         {
             var posts = await _context.Posts.FindAsync(id);
             _context.Posts.Remove(posts);
+
+            List<Comments> comments = _context.Comments
+               .Where(comment => comment.MyPosts.Id == id).ToList();
+
+            foreach (Comments comment in comments)
+            {
+                _context.Comments.Remove(comment);
+            }
+
+            if (posts == null)
+            {
+                return NotFound();
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            
+
         }
 
         private bool PostsExists(int id)

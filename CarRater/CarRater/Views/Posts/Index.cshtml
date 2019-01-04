@@ -43,7 +43,8 @@
     @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
     {
         <p>
-            <a class="btn btn-lg btn-primary" position="center" style="border-width: 5px; border-color: white; margin-bottom: 10px; width: auto; height: 80px; opacity: 0.6; font-size: 35px" asp-action="Create">Create New Post</a>
+            <a class="btn btn-lg btn-primary" position="center" style="border-width: 5px; border-color: white; margin-top: 20px; margin-bottom: 10px; width: auto; height: 80px; 
+                opacity: 0.6; font-size: 35px" asp-action="Create">Create New Post</a>
         </p>
     }
 
@@ -95,19 +96,23 @@
                         <a href="@item.Link" target="blank">@item.Link</a>
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Comments - </a>
+                        <a asp-route-id="@item.Id" class="btn btn-sm btn-primary"style="border-width: 2px; border-color: white; margin-bottom: 10px; width: auto; height: auto; 
+                               opacity: 0.6; font-size: 16px" asp-action="Details">View Comments</a>
+                        @*<a asp-action="Details" asp-route-id="@item.Id">Comments - </a>*@
                     </td>
                     <td>
                         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
                         {
                             //Check if user is admin role and then display admin button along header
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit Post - </a>
+                        <a asp-route-id="@item.Id" class="btn btn-sm btn-primary" style="border-width: 2px; border-color: white; margin-bottom: 10px; width: auto; height: auto;
+                               opacity: 0.6; font-size: 16px" asp-action="Edit">Edit Post</a>
                         }
 
                         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
                         {
                             //Check if user is admin role and then display admin button along header
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-route-id="@item.Id" class="btn btn-sm btn-primary" style="border-width: 2px; border-color: white; margin-bottom: 10px; width: auto; height: auto;
+                               opacity: 0.6; font-size: 16px" asp-action="Delete">Delete</a>
                         }
                     </td>
                 </tr>
