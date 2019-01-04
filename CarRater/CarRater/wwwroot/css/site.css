@@ -21,4 +21,7 @@ body {
     margin: 0 auto;
     font-size: 34px;
     text-align: center;
+    margin-top: 10px;
+    outline: groove;
+    outline-color: #b9b5b5;
 }
