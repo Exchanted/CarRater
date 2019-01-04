@@ -11,8 +11,34 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="Stylesheet" href="/css/site.css" type="text/css" />
     <title>Posts</title>
 </head>
+
+<div class="message">
+    <script type="text/javascript">
+
+        document.write("<p1>");
+
+        var day = new Date();
+        var hr = day.getHours();
+
+        if ((hr == 0) || (hr == 1) || (hr == 2) || (hr == 3) || (hr == 4) || (hr == 5) || (hr == 6) || (hr == 7) ||
+            (hr == 8) || (hr == 9) || (hr == 10) || (hr == 11) || (hr == 12))  {
+            document.write("Good Morning! Welcome To CarRater!");
+        }
+
+        if ((hr == 13) || (hr == 14) || (hr == 15) || (hr == 16) || (hr == 17) || (hr == 16)) {
+            document.write("Good Afternoon! Welcome To CarRater!");
+        }
+        
+        if ((hr == 19) || (hr == 20) || (hr == 21) || (hr == 22) || (hr == 23)) {
+            document.write("Good Evening! Welcome To CarRater!");
+        }
+        document.write("</p1>");
+    </script>
+</div>
+
 <body>
     @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
     {
@@ -21,72 +47,73 @@
         </p>
     }
 
-        <table class="table panel">
-            <thead>
-                <div class="panel-heading">
-                    <tr>
+    <table class="table panel">
+        <thead>
+            <div class="panel-heading">
+                <tr>
+                    <th>
+                        Author of Post
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Source
+                    </th>
+                    <th>
+                        Comment
+                    </th>
+
+                    @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                    {
                         <th>
-                            Author of Post
+                            Admin Panel
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Title)
-                        </th>
-                        <th>
-                            Image
-                        </th>
-                        <th>
-                            Source
-                        </th>
-                        <th>
-                            Comment
-                        </th>
+                    }
+                    <th></th>
+                </tr>
+            </div>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                IdentityUser identityUser = await UserManager.FindByIdAsync(item.UserId);
+                <tr>
+                    <td>
+                        @identityUser.UserName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        <img width="350" height="450" src="@item.Link" />
+                    </td>
+                    <td>
+                        <a href="@item.Link" target="blank">@item.Link</a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Comments - </a>
+                    </td>
+                    <td>
+                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                        {
+                            //Check if user is admin role and then display admin button along header
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit Post - </a>
+                        }
 
                         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
                         {
-                            <th>
-                                Admin Panel
-                            </th>
+                            //Check if user is admin role and then display admin button along header
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         }
-                        <th></th>
-                    </tr>
-                </div>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    IdentityUser identityUser = await UserManager.FindByIdAsync(item.UserId);
-                <tr>
-                        <td>
-                            @identityUser.UserName
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            <img width="350" height="450" src="@item.Link" />
-                        </td>
-                        <td>
-                            <a href="@item.Link" target="blank">@item.Link</a>
-                        </td>
-                        <td>
-                            <a asp-action="Details" asp-route-id="@item.Id">Comments - </a>
-                        </td>
-                        <td>
-                            @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                            {
-                                //Check if user is admin role and then display admin button along header
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit Post - </a>
-                            }
-
-                            @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                            {
-                                //Check if user is admin role and then display admin button along header
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            }
-                        </td>
+                    </td>
                 </tr>
-                }
-            </tbody>
-        </table>
-    </body>
+            }
+        </tbody>
+    </table>
+
+</body>
 </html>
