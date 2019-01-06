@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CarRater.Models;
 
+/**
+ * Used for CRUD operations to database objects created with DbSet parameter
+ **/
+
 namespace CarRater.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -13,7 +17,9 @@ namespace CarRater.Data
             : base(options)
         {
         }
+        //Posts DB CRUD
         public DbSet<CarRater.Models.Posts> Posts { get; set; }
+        //Comments DB CRUD
         public DbSet<CarRater.Models.Comments> Comments { get; set; }
     }
 }

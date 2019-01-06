@@ -10,6 +10,10 @@ using CarRater.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
+/**
+ * Handle Homepage CRUD operations
+ **/
+
 namespace CarRater.Controllers
 {
     [Authorize] // Require a user to login when visitting the page
@@ -18,6 +22,7 @@ namespace CarRater.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
+        // Instanciate DBContext and Acquire UserManager to get user information
         public PostsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
@@ -39,6 +44,7 @@ namespace CarRater.Controllers
                 return NotFound();
             }
 
+            // Get post information matching selected ID
             Posts posts = await _context.Posts
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (posts == null)
@@ -46,6 +52,7 @@ namespace CarRater.Controllers
                 return NotFound();
             }
 
+            // Get a posts comments
             CommentsViewModel viewModel = await GetCommentsDetailsFromPosts(posts);
 
             return View(viewModel);
@@ -53,6 +60,7 @@ namespace CarRater.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // Binded to prevent any overposting
         public async Task<IActionResult> Details([Bind("PostsID,Comment")] CommentsViewModel viewModel)
         {
             IdentityUser user = await _userManager.GetUserAsync(User);
@@ -69,6 +77,7 @@ namespace CarRater.Controllers
                     return NotFound();
                 }
 
+                // Add a comment to a Post
                 comments.UserId = user.Id;
                 _context.Add(comments);
 
@@ -94,6 +103,7 @@ namespace CarRater.Controllers
 
             viewModel.posts = posts;
 
+            // Get comments of a post
             List<Comments> comments = await _context.Comments
                 .Where(m => m.MyPosts == posts).ToListAsync();
 
@@ -119,6 +129,7 @@ namespace CarRater.Controllers
             IdentityUser user = await _userManager.GetUserAsync(User);
             if (ModelState.IsValid)
             {
+                // Create a Post
                 posts.UserId = user.Id;
                 _context.Add(posts);
                 await _context.SaveChangesAsync();
@@ -163,6 +174,7 @@ namespace CarRater.Controllers
             {
                 try
                 {
+                    //Update Post Fields
                     posts.UserId = user.Id;
                     _context.Add(posts);
                     _context.Update(posts);
@@ -193,6 +205,7 @@ namespace CarRater.Controllers
                 return NotFound();
             }
 
+            //Delete post relating to ID
             var posts = await _context.Posts
                 .FirstOrDefaultAsync(m => m.Id == id);
             
@@ -214,7 +227,7 @@ namespace CarRater.Controllers
             {
                 return NotFound();
             }
-
+            
             var comments = await _context.Comments
                 .FirstOrDefaultAsync(m => m.Id == id);
 
@@ -223,6 +236,7 @@ namespace CarRater.Controllers
                 return NotFound();
             }
 
+            //Delete comment relating to ID
             var comment = await _context.Comments.FindAsync(id);
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
@@ -239,9 +253,11 @@ namespace CarRater.Controllers
             var posts = await _context.Posts.FindAsync(id);
             _context.Posts.Remove(posts);
 
+            // Get list of comments to be deleted
             List<Comments> comments = _context.Comments
                .Where(comment => comment.MyPosts.Id == id).ToList();
 
+            // Remove all comments from a post
             foreach (Comments comment in comments)
             {
                 _context.Comments.Remove(comment);
@@ -254,8 +270,6 @@ namespace CarRater.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            
-
         }
 
         private bool PostsExists(int id)

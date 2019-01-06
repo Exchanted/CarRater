@@ -7,18 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 using CarRater.Models;
 using Microsoft.AspNetCore.Authorization;
 
+/**
+ * Handle homepage, splash entry page and navbar operations
+ **/
+
 namespace CarRater.Controllers
 {
     [Authorize] // Require a user to login when visitting the page
     public class HomeController : Controller
     {
-        [Authorize]
+        [Authorize] // Require a user to login when visitting the page
         public IActionResult Index()
         {
             return View(RedirectToAction("", "Posts/Index"));
         }
         
-        [AllowAnonymous]
+        [AllowAnonymous] // Overwritten to allow the view of non-logged in users
         public IActionResult Splash()
         {
             return View("Splash");
@@ -35,22 +39,17 @@ namespace CarRater.Controllers
         [AllowAnonymous] // Overwritten to allow the view of non-logged in users
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Contact";
 
             return View();
         }
         
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]// Require a user to login as admin when visitting the page
         public IActionResult Admin() //Add if user is authenticated as role admin then display this
         {
             return RedirectToAction("", "Users/Index");
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
