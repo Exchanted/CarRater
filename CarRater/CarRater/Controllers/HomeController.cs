@@ -27,15 +27,7 @@ namespace CarRater.Controllers
         {
             return View("Splash");
         }
-
-        [AllowAnonymous] // Overwritten to allow the view of non-logged in users
-        public IActionResult About() 
-        {
-            ViewData["Message"] = "About";
-
-            return View();
-        }
-
+        
         [AllowAnonymous] // Overwritten to allow the view of non-logged in users
         public IActionResult Contact()
         {
