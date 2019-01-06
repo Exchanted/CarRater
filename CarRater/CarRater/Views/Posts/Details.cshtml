@@ -1,4 +1,6 @@
-﻿@model CarRater.Models.CommentsViewModel
+﻿<!--Comments Webpage-->
+
+@model CarRater.Models.CommentsViewModel
 @using Microsoft.AspNetCore.Identity
 
 @inject UserManager<IdentityUser> UserManager
@@ -18,22 +20,24 @@
     <div>
         <h4>Posts</h4>
         <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.posts.Title)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.posts.Title)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.posts.Link)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.posts.Link)
-                </dd>
-            </dl>
+        <!--Post being commented on-->
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.posts.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.posts.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.posts.Link)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.posts.Link)
+            </dd>
+        </dl>
     </div>
 
+    <!--Comment table-->
     <table class="table panel">
         <thead>
             <tr>
@@ -43,8 +47,9 @@
                 <th>
                     Comment
                 </th>
-</thead>
+        </thead>
 
+        <!--List comments with user who commented it-->
         <tbody>
             @foreach (Comments item in Model.Comments)
             {
@@ -56,6 +61,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Comment)
                     </td>
+                    <!--Allow Admin to delete comment-->
                     <td>
                         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
                         {
@@ -64,29 +70,31 @@
                         }
                     </td>
                 </tr>
-                    }
-            </tbody>
+            }
+        </tbody>
     </table>
 
+    <!--Comment being written-->
     <h4>Comments</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Details">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="PostsID" value="@Model.posts.Id"/>
+                <input type="hidden" asp-for="PostsID" value="@Model.posts.Id" />
                 <div class="form-group">
                     <label asp-for="Comment" class="control-label"></label>
                     <input asp-for="Comment" class="form-control" />
                     <span asp-validation-for="Comment" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Comment" class="btn btn-default"/>
+                    <input type="submit" value="Comment" class="btn btn-default" />
                 </div>
             </form>
         </div>
     </div>
 
+    <!--Allow Admin to Edit a Post from Comments page-->
     <div>
         @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
         {

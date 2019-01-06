@@ -1,10 +1,13 @@
-﻿<!DOCTYPE html>
+﻿<!--Navrbar Webpage-->
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CarRater</title>
 
+    <!--Link to Bootstrap and CSS-->
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -37,6 +40,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
+                <!--Update to this when logged-->
                 <partial name="_LoginPartial" />
             </div>
         </div>
@@ -52,6 +56,7 @@
         </footer>
     </div>
 
+    <!--Pre-built Scripts with Project-->
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

@@ -1,3 +1,5 @@
+<!--After logging in Webpage-->
+
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<IdentityUser> SignInManager
@@ -7,21 +9,25 @@
 {
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Posts", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
+            <!--Get Username for Hello Message along navbar-->
             <li>
                 <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
+            <!--Add AdminPanel when Logged in if Role = Admin-->
             <li>
                 @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
                 {
                     //Check if user is admin role and then display admin button along header
                 <li><a asp-area="" asp-controller="Home" asp-action="Admin">Admin Panel</a></li>
-                }
+            }
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
             </ul>
         </form>
     }
     else
+
     {
+        <!--If not logged in, direct to register or login-->
         <ul class="nav navbar-nav navbar-right">
             <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
             <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>

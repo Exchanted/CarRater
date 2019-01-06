@@ -1,4 +1,6 @@
-﻿@model CarRater.Models.UserListViewModel
+﻿<!--Webpage of Users for Admin Panel-->
+
+@model CarRater.Models.UserListViewModel
 
 @{
     ViewData["Title"] = "AdminPanel";
@@ -6,15 +8,18 @@
 
 <h2>Admin Panel: User List</h2>
 
+<!--Table Design-->
 <table class="table">
     <thead>
         <tr>
             <th>
-                
+
             </th>
             <th></th>
         </tr>
     </thead>
+
+    <!--Get Users email and name-->
     <tbody>
 
         @foreach (var item in Model.Users)
@@ -25,7 +30,8 @@
 
         <br>
 
+        <!--Number of users on Website-->
         <p>Number of Users: @Model.NumberOfUsers </p>
-        
+
     </tbody>
 </table>

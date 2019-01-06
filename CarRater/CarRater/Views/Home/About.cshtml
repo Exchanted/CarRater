@@ -1,13 +1,17 @@
-﻿@{
+﻿<!--About webpage-->
+
+@{
     ViewData["Title"] = "CarRater";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
+<!--Send user to Login-->
 <p>In order to access the website further, you must use a logged in account.</p>
 <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
 
 <br />
 
+<!--Send user to Register-->
 <p>Alternatively, you can register here.</p>
 <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>

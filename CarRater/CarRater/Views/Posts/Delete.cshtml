@@ -1,4 +1,6 @@
-﻿@model CarRater.Models.Posts
+﻿<!--Delete Webpage for Admins-->
+
+@model CarRater.Models.Posts
 
 @{
     Layout = Layout;
@@ -13,30 +15,32 @@
 </head>
 <body>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Posts</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Link)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Link)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to Posts</a>
-    </form>
-</div>
+    <!--Post being deleted-->
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Posts</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Link)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Link)
+            </dd>
+        </dl>
+
+        <!--Delete Post-->
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Posts</a>
+        </form>
+    </div>
 </body>
 </html>

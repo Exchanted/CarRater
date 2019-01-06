@@ -1,4 +1,6 @@
-﻿@model CarRater.Models.Posts
+﻿<!--Create Post Webpage for Admins-->
+
+@model CarRater.Models.Posts
 
 @{
     Layout = Layout;
@@ -13,32 +15,35 @@
 </head>
 <body>
 
-<h4>Posts</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Link" class="control-label">Links MUST be from Imgur and be of type '.jpg' or '.png'</label>
-                <input asp-for="Link" class="form-control" />
-                <span asp-validation-for="Link" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create Post"  class="btn btn-lg btn-primary" style="border-width: 5px; border-color: white; margin-bottom: 10px; width: auto; height: 80px; opacity: 0.6; font-size: 35px" />
-            </div>
-        </form>
+    <!--Post being created-->
+    <h4>Posts</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <!--Create with Title and Link as in the Model-->
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <!--Tell Admin Posts must be Imgur and type .jpg or .png-->
+                    <label asp-for="Link" class="control-label">Links MUST be from Imgur and be of type '.jpg' or '.png'</label>
+                    <input asp-for="Link" class="form-control" />
+                    <span asp-validation-for="Link" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create Post" class="btn btn-lg btn-primary" style="border-width: 5px; border-color: white; margin-bottom: 10px; width: auto; height: 80px; opacity: 0.6; font-size: 35px" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to Posts</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to Posts</a>
+    </div>
 
 </body>
 </html>
